@@ -28,7 +28,7 @@ def read_root():
 @app.post("/get_reviews")
 def fetch_reviews(item: Item):
     try:
-        app_store = AppStore(country=item.country, app_name=item.app_name, app_id=item.app_id, log_level="INFO")
+        app_store = AppStore(country=item.country, app_name=item.app_name, app_id=item.app_id, log_level="ERROR")
         app_store.update_offset(item.offset)
         app_store.review(how_many=item.how_many, after=datetime(2021, 12, 31))
         ret = {}
