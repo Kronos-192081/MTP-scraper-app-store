@@ -119,7 +119,7 @@ class Base:
         params=None,
         total=3,
         backoff_factor=3,
-        status_forcelist=[404, 429],
+        status_forcelist=[404, 429, 500, 502, 503, 504],
     ) -> requests.Response:
         retries = Retry(
             total=total,
@@ -209,6 +209,7 @@ class Base:
             logger.error("Keyboard interrupted")
         except Exception as e:
             logger.error(f"Something went wrong: {e}")
+            raise e
         finally:
             self._log_status()
             self._fetched_count = 0
